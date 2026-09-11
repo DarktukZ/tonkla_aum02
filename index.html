@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ผังโรงเรียนศรียาภัย · ค่ายคณิตศาสตร์สัญจร ครั้งที่ 26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="eyebrow">ค่ายคณิตศาสตร์สัญจร ครั้งที่ 26</div>
+    <h1>ผังสถานที่โรงเรียนศรียาภัย · Tonkla 26th</h1>
+    <p>ชี้/แตะหมุดเพื่อให้อาคารสว่างขึ้นและดูรายละเอียด หรือกดเลือกดูข้อมูลแยกรายฝ่ายได้เลย</p>
+    <button class="info-btn" onclick="openChooser()" aria-label="เลือกดูข้อมูลฝ่าย">ⓘ</button>
+  </div>
+
+  <div class="legend">
+    <div class="chip nanny" onclick="openDept('nanny')"><span class="dot"></span>ฝ่ายพี่เลี้ยง<span class="arrow">›</span></div>
+    <div class="chip welfare" onclick="openDept('welfare')"><span class="dot"></span>ฝ่ายสวัสดิการ<span class="arrow">›</span></div>
+    <div class="chip nurse" onclick="openDept('nurse')"><span class="dot"></span>ฝ่ายพยาบาล<span class="arrow">›</span></div>
+  </div>
+  <div class="pin-legend">
+    <span><i class="pl-full"></i>มีตารางกิจกรรม/รูป</span>
+    <span><i class="pl-basic"></i>มีข้อมูลผู้ประจำจุด</span>
+  </div>
+
+  <div class="map-wrap">
+    <div class="map-frame" id="mapFrame">
+      <img class="layer-color" src="__MAP_IMG__.png" alt="ผังโรงเรียนศรียาภัย" draggable="false">
+      <img class="layer-dim" src="__MAP_IMG__.png" alt="" draggable="false">
+      <!-- spot layers + pins injected by JS -->
+    </div>
+  </div>
+  <div class="hint">อาคารที่ยังไม่มีข้อมูลในเอกสารจะไม่มีหมุดปักไว้ · จะทยอยเพิ่มเมื่อได้ข้อมูล</div>
+
+  <div class="index-title">รายการอาคารที่มีข้อมูล</div>
+  <div class="index-grid" id="indexGrid"></div>
+
+  <div class="overlay" id="overlay" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+    <button class="sheet-close" onclick="closeSheet()" aria-label="ปิด">✕</button>
+    <div class="sheet-handle"></div>
+    <div class="sheet-scroll" id="sheetContent"></div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
