@@ -221,35 +221,73 @@ function nurseTimelineHTML(){
 
 /* ---------- department detail data ---------- */
 const DEPTS = {
-  nanny:{
-    label:"ฝ่ายพี่เลี้ยง", cls:"nanny", teaser:"พี่ประจำบ้าน 10 บ้าน · ผู้รับผิดชอบ",
-    lead:{ president:{name:null, contact:null}, deputy:{name:null, contact:null} },
-    render:function(){
-      let html = '<div class="dept-block nanny"><div class="dept-top">บทบาทหลัก</div><div class="dept-body"><ul>'
-        + '<li>ดูแลความเรียบร้อยของน้อง ๆ ในทุกกิจกรรมตลอดค่าย</li></ul></div></div>';
-      html += '<div class="sched-title">พี่ประจำบ้าน (10 บ้าน)</div>';
-      html += '<div class="info-card">';
-      for(let i=1;i<=10;i++){
-        html += '<div class="row-line"><span class="k">บ้าน '+i+'</span><span class="v pending">รอข้อมูล</span></div>';
+nanny:{
+  label:"ฝ่ายพี่เลี้ยง", cls:"nanny", teaser:"พี่ประจำบ้าน 10 บ้าน · ผู้รับผิดชอบ",
+  lead:{ president:{name:"นิชา", contact:"064-180-1708"}, deputy:{name:"บุ๋น", contact:"095-247-5086"} },
+
+  // ใส่ข้อมูลตรงนี้ที่เดียว: ที่ยังไม่มี ปล่อย null ไว้
+  houses:[
+    { no:1,  names:["แพทตี้"], contact:"065-921-7833" },
+    { no:2,  names:["โฟเอ้ม"], contact:"090-788-0817" },
+    { no:3,  names:["บุ๋น"], contact:"095-247-5086" },
+    { no:4,  names:["เฟีย"], contact:"099-046-2646" },
+    { no:5,  names:["เฟิร์ส"], contact:"099-417-2485" },
+    { no:6,  names:["เฟรม"], contact:"062-682-4419" },
+    { no:7,  names:["ครีม"], contact:"083-526-8297" },
+    { no:8,  names:["ปลายฝน"], contact:"095-945-6487" },
+    { no:9,  names:["แพร"], contact:"092-896-8072" },
+    { no:10,  names:["พิ้งค์"], contact:["080-139-9178"] },   
+  ],
+
+  render:function(){
+    const esc = s => String(s).replace(/[&<>"']/g, c =>
+      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    let html = '<div class="dept-block nanny"><div class="dept-top">บทบาทหลัก</div><div class="dept-body"><ul>'
+      + '<li>ดูแลความเรียบร้อยของน้อง ๆ ในทุกกิจกรรมตลอดค่าย</li></ul></div></div>';
+
+    html += '<div class="sched-title">พี่ประจำบ้าน (10 บ้าน)</div>';
+    html += '<div class="info-card">';
+
+    let missing = 0;
+    this.houses.forEach(h => {
+      let value;
+      if(h.names && h.names.length){
+        value = '<span class="v">' + h.names.map(esc).join(', ');
+        if(h.contact){
+          value += ' · <a href="tel:' + esc(h.contact.replace(/[^0-9+]/g,'')) + '">'
+                +  esc(h.contact) + '</a>';
+        }
+        value += '</span>';
+      } else {
+        missing++;
+        value = '<span class="v pending">รอข้อมูล</span>';
       }
-      html += '</div>';
-      html += '<div class="foot-note">ยังไม่ได้รับรายชื่อพี่เลี้ยงประจำบ้านและเบอร์ติดต่อ — จะอัปเดตให้ทันทีที่ได้รับข้อมูล</div>';
-      return html;
+      html += '<div class="row-line"><span class="k">บ้าน ' + h.no + '</span>' + value + '</div>';
+    });
+    html += '</div>';
+
+    // แสดงหมายเหตุเฉพาะเมื่อยังมีบ้านที่ข้อมูลไม่ครบ
+    if(missing > 0){
+      html += '<div class="foot-note">ยังขาดข้อมูลพี่เลี้ยงอีก ' + missing
+            + ' บ้าน — จะอัปเดตให้ทันทีที่ได้รับข้อมูล</div>';
     }
-  },
+    return html;
+  }
+},
   welfare:{
     label:"ฝ่ายสวัสดิการ", cls:"welfare", teaser:"เมนูอาหารแต่ละวัน · จุดบริการที่โรงอาหาร",
-    lead:{ president:{name:null, contact:null}, deputy:{name:null, contact:null} },
+    lead:{ president:{name:"มาร์ค", contact:"088-444-9754"}, deputy:{name:"โฟม", contact:"083-225-2172"} },
     render:function(){
       let html = '<div class="dept-block welfare"><div class="dept-top">บทบาทหลัก</div><div class="dept-body"><ul>'
-        + '<li>ศูนย์กลางการทำงานอยู่ที่โรงอาหาร เปิดบริการ 05.00–23.59 น.</li>'
+        + '<li>ศูนย์กลางการทำงานอยู่ที่โรงอาหาร เปิดบริการ 05.00–23.00 น.</li>'
         + '<li>จัดน้ำดื่ม + น้ำแดง ตลอดวัน และดูแลช่วง Break Time ตามตารางกิจกรรม</li>'
         + '</ul></div></div>';
       html += '<div class="sched-title">เมนูอาหารแต่ละวัน</div>';
       const days = [
-        {d:"11 ตุลาคม 2569", rows:["มื้อเช้า","มื้อกลางวัน","เบรค 1","เบรค 2"]},
-        {d:"12 ตุลาคม 2569", rows:["มื้อเช้า","มื้อกลางวัน","เบรค 1","เบรค 2"]},
-        {d:"13 ตุลาคม 2569 (ข้าวกล่อง)", rows:["มื้อเช้า","มื้อดึก: มาม่าคัพ","มื้อดึก: กาแฟ","มื้อดึก: โอวัลติน"]},
+        {d:"11 ตุลาคม 2569", rows:["มื้อเช้า","มื้อกลางวัน","เบรค 1","เบรค 2","มื้อดึก: มาม่าคัพ","มื้อดึก: กาแฟ","มื้อดึก: โอวัลติน"]},
+        {d:"12 ตุลาคม 2569", rows:["มื้อเช้า","มื้อกลางวัน","เบรค 1","เบรค 2","มื้อดึก: มาม่าคัพ","มื้อดึก: กาแฟ","มื้อดึก: โอวัลติน"]},
+        {d:"13 ตุลาคม 2569 (ข้าวกล่อง)", rows:["มื้อเช้า"]},
       ];
       days.forEach(day=>{
         html += '<div class="info-card"><div class="info-card-title">'+day.d+'</div>';
@@ -264,7 +302,7 @@ const DEPTS = {
   },
   nurse:{
     label:"ฝ่ายพยาบาล", cls:"nurse", teaser:"ข้อมูลยา · จุดประจำตามช่วงกิจกรรม",
-    lead:{ president:{name:"อ๋องน้อย", contact:null}, deputy:{name:"เลม่อน", contact:null} },
+    lead:{ president:{name:"อ๋องน้อย", contact:"099-281-3738"}, deputy:{name:"เลม่อน", contact:"099-345-8483"} },
     render:function(){
       let html = '<div class="sched-title">ข้อมูลยา</div>';
       html += '<div class="info-card">'
