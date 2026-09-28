@@ -236,7 +236,7 @@ nanny:{
     { no:7,  names:["ครีม"], contact:"083-526-8297" },
     { no:8,  names:["ปลายฝน"], contact:"095-945-6487" },
     { no:9,  names:["แพร"], contact:"092-896-8072" },
-    { no:10,  names:["พิ้งค์"], contact:["080-139-9178"] },   
+    { no:10,  names:["พิ้งค์"], contact:"080-139-9178" },   
   ],
 
   render:function(){
