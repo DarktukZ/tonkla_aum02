@@ -228,7 +228,7 @@ function nurseTimelineHTML(){
 const DEPTS = {
 nanny:{
   label:"ฝ่ายพี่เลี้ยง", cls:"nanny", teaser:"พี่ประจำบ้าน 10 บ้าน · ผู้รับผิดชอบ",
-  lead:{ president:{names:"นิชา", contact:"064-180-1708"}, deputy:{names:"บุ๋น", contact:"095-247-5086"} },
+  lead:{ president:{name:"นิชา", contact:"064-180-1708"}, deputy:{name:"บุ๋น", contact:"095-247-5086"} },
 
   // ใส่ข้อมูลตรงนี้ที่เดียว: ที่ยังไม่มี ปล่อย null ไว้
   houses:[
