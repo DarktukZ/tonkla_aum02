@@ -321,27 +321,48 @@ nanny:{
     return html;
   }
 },
-  nurse:{
+nurse:{
     label:"ฝ่ายพยาบาล", cls:"nurse", teaser:"คู่มือปฐมพยาบาล · ข้อมูลยา · จุดประจำ",
     action:{ label:"📘 ปฐมพยาบาล", fn:"openFirstAid()" },
     lead:{ president:{name:"อ๋องน้อย", contact:"099-281-3738"}, deputy:{name:"เลม่อน", contact:"099-345-8483"} },
+
+    // รวมรายการยา: แก้ที่นี่ที่เดียว (n = ชื่อ, q = จำนวน, note = หมายเหตุ)
+    meds:[
+      { n:"ยาแก้ปวด fenamic Mefamed",       q:"2 แผง",   note:"กล่องละ 1 แผง แผงละ 10 เม็ด" },
+      { n:"ยาแก้ปวด Tylenol",               q:"4 แผง",   note:"กล่องละ 2 แผง แผงละ 10 เม็ด" },
+      { n:"ยาทาแก้แพ้ triamcinolone",       q:"2 หลอด",  note:"กล่องละ 1 หลอด" },
+      { n:"ยาแก้แพ้ cettec cetrizine",      q:"2 แผง",   note:"กล่องละ 1 แผง แผงละ 10 เม็ด" },
+      { n:"ยาแก้เมารถ denim (dimenhydrinate)", q:"2 แผง", note:"กล่องละ 1 แผง แผงละ 10 เม็ด" },
+      { n:"CaRBon",                         q:"2 แผง",   note:"กล่องละ 1 แผง แผงละ 10 เม็ด" },
+      { n:"เกลือแร่",                        q:"10 ซอง",  note:"กล่องละ 5 ซอง" },
+      { n:"Povidone Iodine",                q:"2 อัน",   note:"กล่องละ 1 อัน อันละ 30 ml" },
+      { n:"ก้านสำลี",                        q:"6 ซอง",   note:"กล่องละ 3 ซอง ซองละ 5 ก้าน" },
+      { n:"ผ้าก๊อซ",                         q:"4 ผืน",   note:"กล่องละ 2 ผืน" },
+      { n:"ปลาสเตอร์ปิดแผล",                 q:"28 แผ่น", note:"กล่องละ 14 ผืน" },
+      { n:"เทปแต่งแผล",                      q:"2 ม้วน",  note:"กล่องละ 1 ม้วน" },
+      { n:"ซอฟเฟล",                          q:"4 ซอง",   note:"กล่องละ 2 ซอง" },
+      { n:"แอลกอฮอล์",                       q:"1 ขวด",   note:"มีแค่อ๋องน้อย" }
+    ],
+
     render:function(){
-      let html = '<div class="sched-title">ข้อมูลยา</div>';
-      html += '<div class="info-card">'
-        + '<div class="row-line"><span class="k">กล่องพยาบาล</span><span class="v">2 กล่อง</span></div>'
-        + '<div class="row-line"><span class="k">ยาแก้เมา</span><span class="v">1 แผง (8 เม็ด)</span></div>'
-        + '<div class="row-line"><span class="k">ลูกอมแก้เจ็บคอ</span><span class="v">1 ขวด</span></div>'
-        + '<div class="row-line"><span class="k">รายการยาอื่น ๆ</span><span class="v pending">รอข้อมูล</span></div>'
-        + '</div>';
+      let html = '<div class="sched-title">รวมรายการยา</div>';
+      html += '<div class="info-card">';
+      this.meds.forEach(m=>{
+        html += '<div class="row-line">'
+          + '<span class="k">'+m.n
+          + (m.note ? '<small style="display:block;font-size:11px;color:var(--muted);opacity:.85;">'+m.note+'</small>' : '')
+          + '</span>'
+          + '<span class="v">'+m.q+'</span></div>';
+      });
+      html += '</div>';
       html += '<div class="sched-title">จุดประจำตามช่วงกิจกรรม</div>';
       html += nurseTimelineHTML();
       html += '<div class="sched-title">ช่วงพักผ่อน (นอกเวลากิจกรรม)</div>';
       html += '<div class="info-card">'
         + '<div class="row-line"><span class="k">อาคาร 1</span><span class="v">เลม่อน (ห้องนอนหญิง)</span></div>'
         + '<div class="row-line"><span class="k">อาคาร 2</span><span class="v">อ๋องน้อย (ห้องนอนชาย)</span></div>'
-        + '<div class="row-line"><span class="k">อาคาร 3</span><span class="v">ห้องพยาบาลสำรอง (อาจารย์ที่ปรึกษา)</span></div>'
         + '</div>';
-      html += '<div class="foot-note">ช่วงที่ขึ้นว่า “เอกสารไม่ได้ระบุจุดพยาบาล” ยังไม่มีข้อมูลในเอกสารภาพรวมสถานที่ · รายการยาส่วนที่เหลือยังไม่ได้รับข้อมูล — จะอัปเดตให้ทันทีที่ได้รับ</div>';
+      html += '<div class="foot-note">ช่วงที่ขึ้นว่า “เอกสารไม่ได้ระบุจุดพยาบาล” ยังไม่มีข้อมูลในเอกสารภาพรวมสถานที่</div>';
       return html;
     }
   }
