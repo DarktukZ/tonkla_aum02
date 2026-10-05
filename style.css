@@ -541,7 +541,95 @@ h1,h2,h3,.display{
 }
 .npost-act span{ display:block; font-size:10.5px; color:var(--muted); }
 .npost-act em{ font-style:normal; color:var(--muted); }
+/* ---- first aid guide ---- */
+.sheet-title-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; flex-wrap:wrap;
+}
+.sheet-title-row .sheet-title{ margin:0; }
+.head-btn{
+  flex:0 0 auto;
+  border:none;
+  background:var(--c-nurse);
+  color:#fff;
+  border-radius:999px;
+  padding:7px 14px;
+  font-family:'Sarabun',sans-serif;
+  font-size:12.5px;
+  font-weight:600;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.head-btn:active{ transform:scale(0.97); }
 
+.fa-wrap{ margin:14px 20px 0; }
+.fa-sos{
+  background:var(--c-nurse-soft);
+  color:var(--c-nurse);
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:12px;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.5;
+}
+.fa-sos a{ color:inherit; text-decoration:underline; }
+.fa-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.fa-chip{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  border-radius:999px;
+  padding:8px 13px;
+  font-family:'Sarabun',sans-serif;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+}
+.fa-chip:active{ transform:scale(0.97); }
+.fa-chip.active{
+  background:var(--c-nurse);
+  border-color:var(--c-nurse);
+  color:#fff;
+}
+.fa-panel{
+  margin-top:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+}
+.fa-panel[hidden]{ display:none; }
+.fa-title{
+  font-family:'Kanit',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+.fa-intro{
+  margin:0 0 8px;
+  font-size:13px;
+  line-height:1.6;
+  color:var(--ink);
+}
+.fa-block{ margin-top:12px; }
+.fa-h{
+  font-family:'Kanit',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+.fa-block ol, .fa-block ul{ margin:0; padding-left:20px; }
+.fa-block li{ font-size:13px; line-height:1.6; margin-bottom:5px; }
+.fa-block li:last-child{ margin-bottom:0; }
+.fa-block.warn{
+  background:var(--c-nurse-soft);
+  border-radius:10px;
+  padding:10px 12px;
+}
+.fa-block.warn .fa-h{ color:var(--c-nurse); }
 @media (min-width:700px){
   .topbar{padding:28px 32px 30px;}
   .legend, .pin-legend{padding-left:32px;padding-right:32px;}
